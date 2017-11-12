@@ -1,17 +1,22 @@
 <form class="form mprincipal">
   <div class="form-group">
-  	<P></P>
+    <P></P>
     <label for="informações">Bem Vindo ao Dryizer</label>
   </div>
+
+  <div ng-show="mostraBusca">
+    <table class="table table-striped">
+      <tr> 
+        <th>
+          <h3>Nome</h3>
+        </th>
+      </tr>
+      <tr ng-repeat="buscado in buscados">
+        <td>
+          
+        </td>
+      </tr>
+    </table>
+  </div>
+
 </form>
-
-<nav class="navbar navbar-light bg-faded meun">
-  <form class="form-inline">
-    <button class="btn btn-outline-success" type="button">Novidades da Semana</button>
-    <BR></BR>
-    <button class="btn btn-outline-success" type="button">Minhas PlayLists</button>
-    <button class="btn btn-outline-success" type="button">Minhas Musicas</button>
-  </form>
-</nav>
-
-

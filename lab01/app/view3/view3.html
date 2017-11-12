@@ -1,4 +1,4 @@
-
+<!-- <u1>
 <div>
   <div ng-repeat="art in artistas" class="col col-sm-4"> 
   <div class="artistaimg">
@@ -16,12 +16,13 @@
     </div>
   </div>
   </div>
+</u1> -->
 
 </div>
 <form class="form principal">
-	<div class="form-group">
-		<label for="informações">Insira abaixo as informações da musica que deseja</label>
-	</div>
+  <div class="form-group">
+    <label for="informações">Insira abaixo as informações da musica que deseja</label>
+  </div>
 </form>
 
 <form class="form-inline linha">
@@ -33,7 +34,7 @@
 
 <form class="form-inline linha">
    <div class="form-group">
-   	<BR></BR>
+    <BR></BR>
     <label for="nome do Artista">Nome do Artista:</label>
     <input type="text" class="form-control" ng-model="artista" id="text" placeholder="Digite o nome do Artista">
   </div>
@@ -41,7 +42,7 @@
 
 <form class="form-inline linha">
   <div class="form-group">
-  	<BR></BR>
+    <BR></BR>
     <label for="nome do album">Nome do Album:</label>
     <input type="text" class="form-control" ng-model="album" id="text" placeholder="Digite o nome do Album">
   </div>
@@ -49,7 +50,7 @@
 
 <form class="form-inline linha">
   <div class="form-group">
-  	<BR></BR>
+    <BR></BR>
     <label for="ano de lançamento">Ano de Lançamento:</label>
     <input type="text" class="form-control" ng-model="lancamento" id="text" placeholder="Digite o ano de Lançamento">
   </div>
@@ -57,7 +58,7 @@
 
 <form class="form-inline linha"> 
   <div class="form-group">
-  	<BR></BR>
+    <BR></BR>
    <label for="duração">Duração da Musica:</label>
     <input type="text" class="form-control" ng-model="duracao" id="text" placeholder="Digite a duração da Musica">
   </div>
@@ -70,5 +71,5 @@
     <input type="text" class="form-control" ng-model="img" id="text" placeholder="Insira o link da imagem">
   </div>
   <P></P>
-  <button type="enviar" class="btn btn-default" ng-click="addMusica()" ng-disabled="informacoesIncompletas()">Enviar</button> <button type="reset" class="btn-xs btn-default">Limpar</button>
+  <button type="enviar" class="btn btn-default" ng-click="addMusica(musica)" ng-disabled="!musica.nome || !musica.artista || !musica.album || !musica.ano || !musica.duracao">Enviar</button> <button type="reset" class="btn-xs btn-default">Limpar</button>
 </form>

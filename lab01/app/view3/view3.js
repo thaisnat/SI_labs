@@ -9,54 +9,52 @@ angular.module('myApp.view3', ['ngRoute'])
   });
 }])
 
-.controller('View3Ctrl', ['$scope', function($scope) {
-	
-	$scope.artistas = [
-	   ["Luan Santana", [["1977", "2016", [["Eu, Voce, o Mar e Ela", "3:48"]]]], "img/luan.png"],
-	   ["Anitta", [["Bang", "2015", [["Cravo e Canela","3:21"]]]], "img/anitta.jpg"]
-	];
+.controller('View3Ctrl', ["$scope", function($scope) {
 
-	$scope.informacoesIncompletas = function(){
-		if($scope.artista != '' && $scope.album != '' && $scope.musica != '' && $scope.lancamento != '' && $scope.duracao != ''){
-			return false;
-		}else{
-			return true;
-		}
+	$scope.artistas = [];
+	$scope.artista = "";
+	$scope.albuns = [];
+	$scope.ano = "";
+	$scope.duracao = "";
+	$scope.img = "";
+
+
+	$scope.criaAlbum = function(musica){
+
+		var album = new Objetc();
+		album.nome = musica.album;
+		album.ano = musica.ano;
+		album.musicas = [];
+		album.musica.push(musica);
+
+		return album;
 	}
 
-	$scope.addMusica = function(){
-		for(var i = 0; i < $scope.artistas.length; i++){
-			if($scope.artistas[i][0] == $scope.artista){
-				console.log($scope.artistas[i][0]);
-				for(var j = 0; j < $scope.artistas[i][1].length; j++){
-					if($scope.artistas[i][1][j][0] == $scope.album){
-						for(var k = 0; k < $scope.artistas[i][1][j][2].length; k++){
-							if($scope.artistas[i][1][j][2][k][0] == $scope.musica){
-								alert("Música existente.")
-								return;
-							}
-							else{
-								$scope.artistas[i][1][j][2].push([$scope.musica, $scope.duracao]);
-								return;
-						}	}
-					
-					}
-					else{
-						$scope.artistas[i][1].push([$scope.album, $scope.lancamento,[$scope.musica, $scope.duracao]]);
-						return;
+	$scope.addMusica = function(musica){
+
+		console.log("rola");
+
+		var naoExiste = true;
+
+		for(var i = 0; i < $scope.albuns.length; i++){
+			if ($scope.albuns[i].nome === musica.album){
+				for(var j = 0; j < $scope.albuns[i].musicas.length; j++){
+					if($scope.albuns[i].musicas[j].nome === musica.nome){
+						alert("Musica existente!");
+						naoExiste = false;
 					}
 				}
 			}
-			else{
-				$scope.artistas.push([
-					$scope.artista,[[
-					$scope.album,$scope.lancamento,[[
-					$scope.musica,$scope.duracao]]]],
-					$scope.img
-					]);
-				return;
-			}
 		}
-	}
 
+		if(naoExiste){
+			albumIgual.musicas.push(musica);
+		}
+
+		$scope.albuns.push($scope.criaAlbum(musica));
+
+		delete $scope.musica;
+
+
+	}
 }]);
