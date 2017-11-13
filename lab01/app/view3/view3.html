@@ -17,59 +17,85 @@
   </div>
   </div>
 </u1> -->
+<div>
+  <form class="form principal">
+  <div class="form-group">
+      <label for="informações">Insira abaixo as informações da musica que deseja</label>
+    </div>
+  </form>
+<div class="coluna1" style="padding-left: 170px">
+  <form class="form-inline linha">
+      <div class="form-group">
+        <label for="nome da Musica">Nome da Musica:</label>
+        <input type="text" class="form-control" ng-model="musica.nome" id="text" placeholder="Digite o nome da Musica">
+      </div>
+  </form>
 
+  <form class="form-inline linha">
+      <div class="form-group">
+        <BR></BR>
+        <label for="nome do Artista">Nome do Artista:</label>
+        <input type="text" class="form-control" ng-model="musica.artista" id="text" placeholder="Digite o nome do Artista">
+      </div>
+  </form>
+
+  <form class="form-inline linha">
+      <div class="form-group">
+        <BR></BR>
+        <label for="nome do album">Nome do Album:</label>
+        <input type="text" class="form-control" ng-model="musica.album" id="text" placeholder="Digite o nome do Album">
+      </div>
+  </form>
+
+  <form class="form-inline linha">
+      <div class="form-group">
+        <BR></BR>
+        <label for="ano de lançamento">Ano de Lançamento:</label>
+        <input type="text" class="form-control" ng-model="musica.lancamento" id="text" placeholder="Digite o ano de Lançamento">
+      </div>
+  </form>
+
+  <form class="form-inline linha">
+      <div class="form-group">
+        <BR></BR>
+        <label for="duração">Duração da Musica:</label>
+        <input type="text" class="form-control" ng-model="musica.duracao" id="text" placeholder="Digite a duração da Musica">
+      </div>
+      <P></P>
+      <button type="enviar" class="btn btn-default" ng-click="addMusica(musica)" ng-disabled="!musica.nome || !musica.artista || !musica.album || !musica.lancamento || !musica.duracao">Enviar</button>
+  </form>
 </div>
-<form class="form principal">
-  <div class="form-group">
-    <label for="informações">Insira abaixo as informações da musica que deseja</label>
-  </div>
-</form>
 
-<form class="form-inline linha">
-  <div class="form-group">
-    <label for="nome da Musica">Nome da Musica:</label>
-    <input type="text" class="form-control" ng-model="musica" id="text" placeholder="Digite o nome da Musica">
-  </div>
+<form class="form linha">
+    <div class="coluna2" style="padding-right: 170px">
+      <div class="form-group">
+          <h2>Playlists:</h2>
+          <p ng-repeat="playlist in playlists"></p>
+          <button type="enviar" ng-click="criaPlayList(playlist)" data-toggle="modal" data-target="#product_view4" class="btn">Adicionar Playlist</button>
+      </div>
+    </div>
 </form>
-
-<form class="form-inline linha">
-   <div class="form-group">
-    <BR></BR>
-    <label for="nome do Artista">Nome do Artista:</label>
-    <input type="text" class="form-control" ng-model="artista" id="text" placeholder="Digite o nome do Artista">
+<!-- Modal Criar Playlists
+-->
+<div class="modal fade product_view" id="product_view4">
+      <div class="modal-dialog">
+          <div class="modal-content colorModal">
+              <div class="modal-body">
+                <div ng-show="criaPlayList">
+                    <h3 style="text-align: center">Criar Playlist</h3>
+                        <table class="table table-stried">
+                          <tr>
+                            <th>
+                              <label for="playlist">Nome:</label>
+                              <input type="text" class="form-control" ng-model="playlist.nome" id="text" placeholder="Digite o nome da nova playlist">
+                            </th>
+                          </tr>
+                          <tr ng-repeat="playlist in playlists">
+                            <td><button class="btn" type="enviar" ng-click="criaPlayList(playlist)">Add</button></td>
+                          </tr> 
+                        </table>
+                </div>
+              </div>
+            </div>   
+      </div>
   </div>
-</form>
-
-<form class="form-inline linha">
-  <div class="form-group">
-    <BR></BR>
-    <label for="nome do album">Nome do Album:</label>
-    <input type="text" class="form-control" ng-model="album" id="text" placeholder="Digite o nome do Album">
-  </div>
-</form>
-
-<form class="form-inline linha">
-  <div class="form-group">
-    <BR></BR>
-    <label for="ano de lançamento">Ano de Lançamento:</label>
-    <input type="text" class="form-control" ng-model="lancamento" id="text" placeholder="Digite o ano de Lançamento">
-  </div>
-</form>
-
-<form class="form-inline linha"> 
-  <div class="form-group">
-    <BR></BR>
-   <label for="duração">Duração da Musica:</label>
-    <input type="text" class="form-control" ng-model="duracao" id="text" placeholder="Digite a duração da Musica">
-  </div>
-</form>
-
-<form class="form-inline linha">
-  <div class="form-group">
-    <BR></BR>
-    <label for="Link da Imagem do Artista">Link da Imagem do Artista:</label>
-    <input type="text" class="form-control" ng-model="img" id="text" placeholder="Insira o link da imagem">
-  </div>
-  <P></P>
-  <button type="enviar" class="btn btn-default" ng-click="addMusica(musica)" ng-disabled="!musica.nome || !musica.artista || !musica.album || !musica.ano || !musica.duracao">Enviar</button> <button type="reset" class="btn-xs btn-default">Limpar</button>
-</form>

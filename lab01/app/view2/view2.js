@@ -14,6 +14,7 @@ angular.module('myApp.view2', ['ngRoute'])
 	$scope.artistas = [];
 	$scope.artista = "";
 	$scope.favoritos= [];
+	$scope.albuns = [];
 	$scope.menuFavoritos = false;
 	$scope.buscados = [];
 	$scope.artistaSelecionado = "";
@@ -22,25 +23,62 @@ angular.module('myApp.view2', ['ngRoute'])
 
 	$scope.addArtista = function(artista) {
 		
-		var naoIguais = true;
+		var key = false;
 
 		for(var i=0; i<$scope.artistas.length; i++){
-			if($scope.artistas[i].nome == artista.nome){
-				alert("Artista já existente.");
-				naoIguais = false;
+			if($scope.artistas[i].nome == artista.nome && key === false){
+				alert("Artista existente!");
+				 key = true;
 			}
 		}
 
-		if(naoIguais){
-			artista.ultimaMusica = "Ainda não escutado!"
-			artista.nota = "-";
-			$scope.artistas.push(artista);
-			alert("Artista adicionado como sucesso.");
-		}
+		if(key === false){
 
-		delete $scope.artista;
+        artista.albuns = [];
+        artista.ultimaMusica = "Nenhuma música ouvida!"
+
+        for (var i = 0; i < $scope.albuns.length; i++) {
+          if ($scope.albuns[i].artista === artista.nome){
+            artista.albuns.push($scope.albuns[i]);
+          }
+        }
+        $scope.artistas.push(artista);
+        alert("Artista adicionado como sucesso.");
+      }
+
+      delete $scope.artista;
 		
 	}
+	/*
+	$scope.adicionarArtista = function(artista){
+
+      var key = false;
+
+      for (var i = 0; i < $scope.artistas.length; i++) {
+        if($scope.artistas[i].nome === artista.nome && key === false){
+          alert("Artista já existente no sistema!");
+          key = true;
+        }
+      }
+
+      if(key === false){
+
+        artista.albuns = [];
+        artista.ultimaMusica = "Nenhuma música ouvida!"
+
+        for (var i = 0; i < $scope.albuns.length; i++) {
+          if ($scope.albuns[i].artista === artista.nome){
+            artista.albuns.push($scope.albuns[i]);
+          }
+        }
+        $scope.artistas.push(artista);
+      }
+
+      delete $scope.artista;
+
+    };
+    */
+
 
 	$scope.mostraArtista1 = function(artista){
 
@@ -71,23 +109,23 @@ angular.module('myApp.view2', ['ngRoute'])
 			
 	}
 
-	$scope.addNota = function(artista1, nota1){
-      artista1.nota = nota1;
-      delete $scope.nota;
+	$scope.addNota = function(nota1){
+      $scope.artistaSelecionado.nota = nota1;
+      delete $scope.nota1;
     }
 
-     $scope.ultimaMusica = function(artistaSelecionado, ultimaMusica){
-      artistaSelecionado.ultimaMusica = ultimaMusica;
 
-      delete $scope.ultimaMusica;
+     $scope.ultimaMusica = function(ultimaMusicaa){
+      $scope.artistaSelecionado.ultimaMusica = ultimaMusicaa;
+      delete $scope.ultimaMusicaa;
     }
 
-      $scope.addFavoritos = function (artista){
+      $scope.addFavoritos = function (artista1){
 
 	      var jaAdicionado = true;
 
 	      for (var i = 0; i < $scope.favoritos.length; i++) {
-	        if ($scope.favoritos[i].nome === artista.nome && jaAdicionado) {
+	        if ($scope.favoritos[i].nome === artista1.nome && jaAdicionado) {
 	          alert("Artista já foi adicionado a lista de favoritos!");
 	          jaAdicionado = false;
 
@@ -95,7 +133,7 @@ angular.module('myApp.view2', ['ngRoute'])
 	      }
 
 	      if(jaAdicionado){
-	        $scope.favoritos.push(angular.copy(artista));
+	        $scope.favoritos.push(angular.copy(artista1));
 	        alert("Artista adicionado com sucesso!");
 	      }
 	    }
@@ -111,5 +149,39 @@ angular.module('myApp.view2', ['ngRoute'])
         }
       }
     }
+
+    $scope.criaAlbum = function(musica){
+
+      var album = new Object();
+      album.nome = musica.album;
+      album.artista = musica.artista;
+      album.musicas = [];
+      $scope.adicionaAlbumAoArtista(album);
+      album.musicas.push(musica);
+
+      return album;
+
+    };
+
+    $scope.verificaAlbumIgual = function(album, musica){
+
+      if(album.nome === musica.album){
+        return true;
+      }
+
+      return false;
+
+    };
+
+    $scope.verificaMusicaIgual = function(album, musica){
+
+      for (var i = 0; i < album.musicas.length; i++) {
+        if(album.musicas[i].nome === musica.nome){
+          return true;
+        }
+      }
+
+      return false;
+    };
 
 }]);

@@ -17,44 +17,104 @@ angular.module('myApp.view3', ['ngRoute'])
 	$scope.ano = "";
 	$scope.duracao = "";
 	$scope.img = "";
+	$scope.playlists = [];
+	$scope.playlistModal = "";
 
 
 	$scope.criaAlbum = function(musica){
 
-		var album = new Objetc();
+		var album = new Object();
 		album.nome = musica.album;
 		album.ano = musica.ano;
 		album.musicas = [];
-		album.musica.push(musica);
+		album.musicas.push(musica);
 
 		return album;
 	}
 
-	$scope.addMusica = function(musica){
+	 $scope.addMusica = function(musica){
 
-		console.log("rola");
+      var naoAdicionado = true;
 
-		var naoExiste = true;
+      if($scope.albuns.length < 1){
 
-		for(var i = 0; i < $scope.albuns.length; i++){
-			if ($scope.albuns[i].nome === musica.album){
-				for(var j = 0; j < $scope.albuns[i].musicas.length; j++){
-					if($scope.albuns[i].musicas[j].nome === musica.nome){
-						alert("Musica existente!");
-						naoExiste = false;
-					}
-				}
-			}
-		}
+        $scope.albuns.push($scope.criaAlbum(musica));
+        alert("Música adicionada com sucesso");
 
-		if(naoExiste){
-			albumIgual.musicas.push(musica);
-		}
+      }else{
+        for (var i = 0; i < $scope.albuns.length; i++) {
+          if($scope.verificaAlbumIgual($scope.albuns[i], musica)){
+            if($scope.verificaMusicaIgual($scope.albuns[i], musica) && naoAdicionado){
+              alert("Não pode existir duas músicas com o mesmo nome no mesmo álbum");
+              naoAdicionado = false;
+            }else{
+              if(naoAdicionado){
+                $scope.albuns[i].musicas.push(musica);
+                alert("Música adicionada com sucesso");
+                naoAdicionado = false;
+              }
+            }
 
-		$scope.albuns.push($scope.criaAlbum(musica));
+          }else{
+            if(naoAdicionado){
+              $scope.albuns.push($scope.criaAlbum(musica));
+              alert("Música adicionada com sucesso");
+              naoAdicionado = false;
+            }
+          }
+        }
+      }
 
-		delete $scope.musica;
+      delete $scope.musica;
+    };
+
+    $scope.adicionaMusicaPlaylist = function(musicaAdd){
+      $scope.playlistModal.musicas.push(musicaAdd);
+
+      delete $scope.musicaAdd;
+    }
 
 
-	}
+    $scope.removeMusicaPlaylist = function(musicaPlaylist){
+
+      var naoExcluido = true;
+
+      for (var i = $scope.playlistModal.musicas.length -1; i >= 0; i--) {
+        if($scope.playlistModal.musicas[i].nome === musicaPlaylist.nome && naoExcluido){
+          $scope.playlistModal.musicas.splice(i,1);
+          naoExcluido = false;
+        }
+      }
+    }
+
+    $scope.criaPlaylist = function(playlist){
+
+      var naoIguais = true;
+
+      for (var i = 0; i < $scope.playlists.length; i++) {
+        if($scope.playlists[i].nome === playlist.nome && naoIguais){
+          naoIguais = false;
+          alert("Você não pode criar duas playlists com o mesmo nome!")
+        }
+      }
+
+      if(naoIguais){
+        playlist.musicas = [];
+        $scope.playlists.push(playlist);
+      }
+
+      delete $scope.playlist;
+    };
+
+    $scope.removePlaylist = function(playlist){
+
+      var naoRemovido = true;
+
+      for(var i = $scope.playlists.length-1; i >= 0; i--){
+        if ($scope.playlists[i].nome === playlist.nome && naoRemovido){
+          $scope.playlists.splice(i,1);
+          naoRemovido = false;
+        }
+      }
+    };
 }]);

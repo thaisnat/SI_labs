@@ -84,11 +84,13 @@ a:hover{
 
 .coluna1{
    width: 460px;
+   margin:auto;
   float: left;
 }
 
 .coluna2{
   width: 480px;
+  margin:auto;
     float: right;
     padding-bottom: 20px;
     padding-left: 50px;
