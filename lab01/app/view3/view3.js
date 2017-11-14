@@ -17,9 +17,9 @@ angular.module('myApp.view3', ['ngRoute'])
 	$scope.ano = "";
 	$scope.duracao = "";
 	$scope.img = "";
-	$scope.playlists = [];
-	$scope.playlistModal = "";
-
+	$scope.playLists = [];
+  $scope.playinfos = '';
+  $scope.ultArtAdd = false ;
 
 	$scope.criaAlbum = function(musica){
 
@@ -68,53 +68,62 @@ angular.module('myApp.view3', ['ngRoute'])
       delete $scope.musica;
     };
 
-    $scope.adicionaMusicaPlaylist = function(musicaAdd){
-      $scope.playlistModal.musicas.push(musicaAdd);
+    $scope.criaPlaylist = function(playList){
 
-      delete $scope.musicaAdd;
-    }
+      if(!$scope.temPlayList){
+        for (var i = 0; i < $scope.playLists.length; i++) {
+          if ($scope.playLists[i].nome === playList.nome) {
+          alert("Ops! Esta playlist ja existe!")
+          
 
+          }
+        }}
 
-    $scope.removeMusicaPlaylist = function(musicaPlaylist){
-
-      var naoExcluido = true;
-
-      for (var i = $scope.playlistModal.musicas.length -1; i >= 0; i--) {
-        if($scope.playlistModal.musicas[i].nome === musicaPlaylist.nome && naoExcluido){
-          $scope.playlistModal.musicas.splice(i,1);
-          naoExcluido = false;
-        }
+      else{
+        $scope.playLists.push(playList);
+        alert("PlayList criada com sucesso!");
       }
-    }
+    
+  }
 
-    $scope.criaPlaylist = function(playlist){
-
-      var naoIguais = true;
-
-      for (var i = 0; i < $scope.playlists.length; i++) {
-        if($scope.playlists[i].nome === playlist.nome && naoIguais){
-          naoIguais = false;
-          alert("Você não pode criar duas playlists com o mesmo nome!")
-        }
-      }
-
-      if(naoIguais){
-        playlist.musicas = [];
-        $scope.playlists.push(playlist);
-      }
-
-      delete $scope.playlist;
-    };
-
-    $scope.removePlaylist = function(playlist){
+  $scope.removePlayList = function(playList){
 
       var naoRemovido = true;
 
-      for(var i = $scope.playlists.length-1; i >= 0; i--){
-        if ($scope.playlists[i].nome === playlist.nome && naoRemovido){
-          $scope.playlists.splice(i,1);
+      for(var i = $scope.playList.length-1; i >= 0; i--){
+        if ($scope.playLists[i].nome === playList.nome && naoRemovido){
+          $scope.playLists.splice(i,1);
           naoRemovido = false;
         }
       }
     };
+
+  $scope.addMusicaAPLay = function(playList, musicaAdd){
+
+      playList.musicas.push(musicaAdd);
+      delete $scope.musicaAdd;
+    }
+
+    $scope.mostrarPlay = function(playList){
+      $scope.playinfos = playList;
+    }
+
+    $scope.temPlayList = function(){
+    if($scope.playLists.length > 0){
+      return true;
+    }
+    return false;
+  }
+
+    $scope.removeMusicaPlaylist = function(musicaPlayList){
+
+      var naoExcluido = true;
+
+      for (var i = $scope.playLists.musicas.length -1; i >= 0; i--) {
+        if($scope.playLists.musicas[i].nome === musicaPlayList.nome && naoExcluido){
+          $scope.playLists.musicas.splice(i,1);
+          naoExcluido = false;
+        }
+      }
+    }
 }]);

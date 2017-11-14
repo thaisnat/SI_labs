@@ -69,33 +69,65 @@
 <form class="form linha">
     <div class="coluna2" style="padding-right: 170px">
       <div class="form-group">
-          <h2>Playlists:</h2>
+          <h2>Criar PlayLists:</h2>
           <p ng-repeat="playlist in playlists"></p>
-          <button type="enviar" ng-click="criaPlayList(playlist)" data-toggle="modal" data-target="#product_view4" class="btn">Adicionar Playlist</button>
+          <button type="enviar" ng-click="" data-toggle="modal" data-target="#product_view4" class="btn">Criar</button>
+      </div>
+    </div>
+
+    <div class="coluna2" style="padding-right: 170px">
+      <div class="form-group">
+          <h2>PlayLists Salvas:</h2>
+          <p ng-repeat="playList in playLists">
+          <button class="btn" data-toggle="modal" data-target="#product_view5" ng-click="">{{playList.nome}}</button>
+        </p>
       </div>
     </div>
 </form>
+
+
 <!-- Modal Criar Playlists
 -->
 <div class="modal fade product_view" id="product_view4">
       <div class="modal-dialog">
           <div class="modal-content colorModal">
               <div class="modal-body">
-                <div ng-show="criaPlayList">
-                    <h3 style="text-align: center">Criar Playlist</h3>
-                        <table class="table table-stried">
-                          <tr>
-                            <th>
-                              <label for="playlist">Nome:</label>
-                              <input type="text" class="form-control" ng-model="playlist.nome" id="text" placeholder="Digite o nome da nova playlist">
-                            </th>
-                          </tr>
-                          <tr ng-repeat="playlist in playlists">
-                            <td><button class="btn" type="enviar" ng-click="criaPlayList(playlist)">Add</button></td>
-                          </tr> 
-                        </table>
+                  <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                <h3 class="modal-title">Adicionar PlayList</h3>
+            </div>
+         
+               <form class="form">
+                <table class="table table-stried">
+      
+                     <div class="form-group">
+                          <td><input style="width: 300px" type="nome" class="form-control" id="text" placeholder="Digite o nome da playList" ng-model="playList.nome"></td>
+                          <td><button type="submit" class="btn btn-default" ng-click="criaPlaylist(playList)">Add PlayList</button></td>
+                  </table>
                 </div>
               </div>
-            </div>   
-      </div>
+            </div>
+          </form>
+    </div>
   </div>
+</div>
+
+<!-- Modal Adicionar musicas a Playlist
+-->
+
+<div class="modal fade product_view" id="product_view5">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                <h3 class="modal-title">Adicionar música</h3>
+            </div>
+              <table class="table table-stried">
+      
+                     <div class="form-group">
+                          <td><input style="width: 300px" type="text" class="form-control" id="text" placeholder="Digite nome da música" ng-model="musicaPlay.nome"></td>
+                          <td><button type="submit" class="btn btn-default botao-addmusica" ng-click="addMusicaAPLay(list,musicaPlay)" ng-disabled="!playList" data-dismiss="modal" data-target="#">Adicionar</button></td>
+              </table>
+                </div>
+        </div>
+    </div>
+</div>   

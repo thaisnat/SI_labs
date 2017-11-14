@@ -75,16 +75,16 @@
                 <div ng-show="mostraArtista">
                     <div class="row">
                         <div class="col-lg-6">
-                            <img style="width: 250px; height: 250px" ng-src="{{artistaFavorito.imagem}}">
+                            <img style="width: 250px; height: 250px" ng-src="{{artista.imagem}}">
                         </div>
                         <div class="col-lg-6">
                         <ul class="list-group">
                           <h4>Nome do Artista:</h4>
-                          <l1 class="list-group-item list-group-item-danger"> {{artistaFavorito.nome}} </l1>
+                          <l1 class="list-group-item list-group-item-danger"> {{artista.nome}} </l1>
                           <h4>Última música:</h4>
-                          <li class="list-group-item list-group-item-danger"> {{artistaFavorito.ultimaMusica}} </li>
+                          <li class="list-group-item list-group-item-danger"> {{artista.ultimaMusicaa}} </li>
                           <h4>Nota:</h4>
-                           <li class="list-group-item list-group-item-danger">{{artistaFavorito.nota}}</l1>
+                           <li class="list-group-item list-group-item-danger">{{nota}}</l1>
                         </ul>
                         </div>
                     </div>
@@ -95,12 +95,10 @@
                   <div class="row">
                        <div class="col-md-6">
                           <input style="width: 100px margin:left" type="nota" nome="nota" class="form-control" id="text" placeholder="Nota do artista" ng-model="nota">
-                          <BR></BR>
-                          <button type="button" class="botaoModal btn btn-blocked" ng-click="addNota(nota)"> Atribuir nota:</button>  
                        </div>
                        <div class="col-md-6">
                           <input style="width: 100px margin:left" type="ultimaMusica" nome="ultimaMusica" class=" form-control" id="text" placeholder="Última música" ng-model="artista.ultimaMusicaa">
-                          <button type="button" style="margin-top: 45px" class="botaoModal btn btn-blocked" ng-click="ultimaMusica(ultimaMusicaa)"> Última música:</button>  
+                          <button type="enviar" ng-click="" class="btn">Enviar</button>
                        </div>
                       </div>        
                   </div>
@@ -136,14 +134,14 @@
                 <div ng-show="mostraArtista">
                     <div class="row">
                         <div class="col-lg-6">
-                            <img style="width: 250px; height: 250px" ng-src="{{artistaFavorito.imagem}}">
+                            <img style="width: 250px; height: 250px" ng-src="{{artista.imagem}}">
                         </div>
                         <div class="col-lg-6">
                         <ul class="list-group">
                           <h4>Nome do Artista:</h4>
-                          <l1 class="list-group-item list-group-item-danger"> {{favorito.nome}} </l1>
+                          <l1 class="list-group-item list-group-item-danger"> {{artistaAdicionado.nome}} </l1>
                           <h4>Lista de Albuns:</h4>
-                          <li class="list-group-item list-group-item-danger"> {{favorito.albuns}} </li>
+                          <li class="list-group-item list-group-item-danger"> {{artistaAdicionado.albuns}} </li>
                         </ul>
                         </div>
                     </div>
@@ -155,26 +153,32 @@
 
   <!-- Modal da lista de Artistas
     -->
-
-    <div class="modal fade product_view" id="product_view2">
+<div class="modal fade product_view" id="product_view2">
       <div class="modal-dialog">
           <div class="modal-content colorModal">
               <div class="modal-body">
-                <div ng-show="mostraArtista">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <img style="width: 250px; height: 250px" ng-src="{{artistaFavorito.imagem}}">
-                        </div>
-                        <div class="col-lg-6">
+                  <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                <h3 class="modal-title">Informações do Artista</h3>
+            </div>
+         
+               <form class="form">
+                <table class="table table-stried">
+                      <div class="col-lg-6">
+                            <img style="width: 250px; height: 250px" ng-src="{{artista.imagem}}">
+                      </div>
+                     <div class="form-group">
+                          <div class="col-lg-6">
                         <ul class="list-group">
                           <h4>Nome do Artista:</h4>
-                          <l1 class="list-group-item list-group-item-danger"> {{artistaFavorito.nome}} </l1>
+                          <l1 class="list-group-item list-group-item-danger"> {{favorito.nome}} </l1>
                           <h4>Lista de Albuns:</h4>
                           <li class="list-group-item list-group-item-danger"> {{favorito.albuns}} </li>
                         </div>
-                    </div>
+                  </table>
                 </div>
               </div>
-            </div>   
-      </div>
+            </div>
+          </form>
+    </div>
   </div>
+</div>

@@ -27,7 +27,7 @@ angular.module('myApp.view2', ['ngRoute'])
 
 		for(var i=0; i<$scope.artistas.length; i++){
 			if($scope.artistas[i].nome == artista.nome && key === false){
-				alert("Artista existente!");
+				alert("Ops! Este Artista ja existe!");
 				 key = true;
 			}
 		}
@@ -43,7 +43,7 @@ angular.module('myApp.view2', ['ngRoute'])
           }
         }
         $scope.artistas.push(artista);
-        alert("Artista adicionado como sucesso.");
+        alert("Artista adicionado com sucesso!");
       }
 
       delete $scope.artista;
